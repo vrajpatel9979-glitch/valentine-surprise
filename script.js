@@ -31,31 +31,34 @@ function spawnHeart(extra = false) {
   setTimeout(() => heart.remove(), duration * 1000);
 }
 
-// background hearts
+// floating hearts in background
 setInterval(() => spawnHeart(false), 250);
 
+// start music ONLY when yes is pressed
 async function startMusic() {
-  try { await music.play(); } catch(e) {}
+  try {
+    await music.play();
+  } catch (e) {}
 }
 
 function showYesEnding() {
-  question.innerText = "Hehe… I knew it 😍💘";
+  question.innerText = "Hehe… I knew it 😍";
   subline.innerText = "You just made my whole day.";
   result.classList.remove("hidden");
-  resultTitle.innerText = "Happy Valentine’s Day 💕";
+
+  resultTitle.innerText = "Happy Valentine’s Day My Babygirl💕";
   resultText.innerText =
     "Now come here… I need one hug + 100 kisses. Non-negotiable 😏💖";
 
-  // hide buttons
   yesBtn.classList.add("hidden");
   noBtn.classList.add("hidden");
 
-  // heart burst
-  for (let i = 0; i < 35; i++) setTimeout(() => spawnHeart(true), i * 40);
+  for (let i = 0; i < 35; i++) {
+    setTimeout(() => spawnHeart(true), i * 40);
+  }
 }
 
 function moveNoButton() {
-  // Make it run away 😄
   noBtn.classList.add("absolute");
 
   const padding = 20;
@@ -69,13 +72,14 @@ function moveNoButton() {
   noBtn.style.top = y + "px";
 }
 
+// YES button → play music
 yesBtn.addEventListener("click", async () => {
   await startMusic();
   showYesEnding();
 });
 
-noBtn.addEventListener("click", async () => {
-  await startMusic();
+// NO button → NO MUSIC
+noBtn.addEventListener("click", () => {
   noCount++;
 
   const lines = [
@@ -88,18 +92,15 @@ noBtn.addEventListener("click", async () => {
 
   subline.innerText = lines[Math.min(noCount - 1, lines.length - 1)];
 
-  // Make YES more tempting
   const scale = 1 + Math.min(noCount * 0.15, 1.2);
   yesBtn.style.transform = `scale(${scale})`;
 
-  // After a few "No"s -> run away
   if (noCount >= 2) moveNoButton();
 
-  // After many "No"s -> auto YES
   if (noCount >= 5) showYesEnding();
 });
 
-// Extra: No runs away even on hover (desktop)
+// desktop hover escape
 noBtn.addEventListener("mouseenter", () => {
   if (noCount >= 2) moveNoButton();
 });
