@@ -117,7 +117,3 @@ body, h1, h2, p, .mini, #subline, #resultText, #resultTitle {
   color: white !important;
 }
 
-/* Force all text white */
-body, h1, h2, p, .mini, #subline, #resultText, #resultTitle {
-  color: white !important;
-}
