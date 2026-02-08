@@ -145,3 +145,15 @@ button:active {
   from { transform: translateY(0) rotate(45deg); }
   to { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
 }
+/* Force all text inside card to be white */
+.card,
+.card h1,
+.card p,
+.card h2,
+.card .mini,
+#subline,
+#resultText,
+#resultTitle,
+.tip {
+  color: #ffffff !important;
+}
