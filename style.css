@@ -1,36 +1,55 @@
+/* Full screen background with dark overlay */
 body {
   margin: 0;
   height: 100vh;
   font-family: Arial, sans-serif;
   overflow: hidden;
 
-  background: url("photo.jpg") no-repeat center center/cover;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url("photo2.jpg") no-repeat center center/cover;
+
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Glass card */
 .card {
   width: min(380px, 90vw);
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   border-radius: 18px;
   padding: 20px;
   text-align: center;
   color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
+/* If you are still using image inside card */
 .photo {
   width: 100%;
-  border-radius: 16px;
-  object-fit: cover;
-  max-height: 320px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+  border-radius: 14px;
+  margin-bottom: 10px;
 }
 
-h1 { margin: 12px 0 6px; color: #b3003c; }
-#subline { margin: 6px 0 14px; color: #333; }
+/* Text styles */
+h1 {
+  margin: 10px 0 6px;
+  color: #ffffff;
+}
 
+#subline {
+  margin: 6px 0 14px;
+  color: #f1f1f1;
+}
+
+.tip {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #dddddd;
+}
+
+/* Buttons */
 .btnRow {
   display: flex;
   gap: 12px;
@@ -45,51 +64,54 @@ button {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-  transition: transform 0.12s ease, opacity 0.12s ease;
+  transition: transform 0.15s ease;
 }
 
-button:active { transform: scale(0.97); }
+button:active {
+  transform: scale(0.95);
+}
 
 .yes {
   background: #ff2e63;
   color: white;
-  box-shadow: 0 8px 18px rgba(255,46,99,0.35);
+  box-shadow: 0 6px 15px rgba(255,46,99,0.4);
 }
 
 .no {
-  background: #ffffff;
-  border: 2px solid #ff2e63;
+  background: white;
   color: #ff2e63;
+  border: 2px solid #ff2e63;
 }
 
-/* We'll move "No" around, so make it absolute when needed */
-.no.absolute {
-  position: fixed;
-  z-index: 9999;
+/* Result box */
+.hidden {
+  display: none;
 }
-
-.hidden { display: none; }
 
 #result {
   margin-top: 14px;
   padding: 14px;
   border-radius: 14px;
-  background: rgba(255, 200, 215, 0.55);
+  background: rgba(255, 46, 99, 0.2);
 }
 
-#resultTitle { margin: 0 0 6px; color: #b3003c; }
-#resultText { margin: 0; color: #333; }
-
-.mini { margin-top: 10px; font-weight: bold; color: #b3003c; }
-
-.tip {
-  margin-top: 12px;
-  font-size: 12px;
-  opacity: 0.7;
+#resultTitle {
+  margin: 0 0 6px;
+  color: #ffffff;
 }
 
-/* Hearts */
+#resultText {
+  margin: 0;
+  color: #ffffff;
+}
+
+.mini {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* Floating hearts */
 #hearts {
   position: fixed;
   inset: 0;
@@ -115,10 +137,11 @@ button:active { transform: scale(0.97); }
   background: inherit;
   border-radius: 50%;
 }
+
 .heart::before { left: -9px; }
-.heart::after  { top: -9px; }
+.heart::after { top: -9px; }
 
 @keyframes floatUp {
   from { transform: translateY(0) rotate(45deg); }
-  to   { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+  to { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
 }
